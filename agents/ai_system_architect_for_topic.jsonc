@@ -1,6 +1,6 @@
 {
   // Agent's role title — appears in prompts and logs.
-  // You can use {placeholder} inputs in role, goal, or backstory.
+  // You can use -> {placeholder} inputs in role, goal, or backstory.
   // Example: "role": "Senior {industry} Researcher"
   "role": "AI System Architect for {topic}",
 
