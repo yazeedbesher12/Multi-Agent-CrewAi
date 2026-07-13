@@ -1,52 +1,55 @@
 # Research Crew
 
-واجهة Streamlit بسيطة لتشغيل مشروع CrewAI الحالي: تكتب فكرة أو نص البحث، تضغط زر البدء، ثم تظهر النتيجة في نفس الصفحة.
+A simple Streamlit interface for the current CrewAI project. Enter a research topic or project idea, start the workflow, and view the generated result on the same page.
 
-## التشغيل المحلي
+## Live App
+
+https://multi-agent-crewai-g6szavwpmthv3b4wllhj2b.streamlit.app/
+
+## Run Locally
 
 ```bash
 uv sync
 uv run streamlit run app.py
 ```
 
-بعد التشغيل افتح الرابط المحلي الذي يظهر في الطرفية، غالبًا:
+Then open the local URL printed by Streamlit, usually:
 
 ```text
 http://localhost:8501
 ```
 
-## متغيرات التشغيل
+## Environment Variables
 
-محليًا، ضع المفاتيح في ملف `.env`:
+For local development, create a `.env` file in the project root:
 
 ```text
 OPENROUTER_API_KEY="your-openrouter-key"
 SERPER_API_KEY="your-serper-key"
-APP_PASSWORD="optional-password"
 ```
 
-على Streamlit Community Cloud، أضف نفس القيم من صفحة Secrets. لا ترفع المفاتيح الحقيقية إلى GitHub.
+For Streamlit Community Cloud, add the same values in:
 
-## النشر على Streamlit
-
-1. ادخل إلى Streamlit Community Cloud: <https://share.streamlit.io>
-2. اختر المستودع: `yazeedbesher12/Multi-Agent-CrewAi`
-3. اختر الفرع: `master`
-4. اجعل ملف التطبيق: `app.py`
-5. أضف Secrets:
+`App settings` -> `Secrets`
 
 ```toml
-OPENROUTER_API_KEY = "replace-with-real-value"
-SERPER_API_KEY = "replace-with-real-value"
-APP_PASSWORD = "optional-password"
+OPENROUTER_API_KEY = "your-openrouter-key"
+SERPER_API_KEY = "your-serper-key"
 ```
 
-6. اضغط Deploy.
+Do not commit real API keys to GitHub.
 
-بعد النشر سيظهر رابط بالشكل:
+## Deploy On Streamlit Community Cloud
 
-```text
-https://your-app-name.streamlit.app
+1. Open <https://share.streamlit.io>
+2. Select the GitHub repository: `yazeedbesher12/Multi-Agent-CrewAi`
+3. Select the branch: `master`
+4. Set the app file to: `app.py`
+5. Add the required secrets.
+6. Deploy the app.
+
+Public usage of the app consumes the configured OpenRouter and Serper quotas. To restrict access, add an optional password:
+
+```toml
+APP_PASSWORD = "your-password"
 ```
-
-يمكن تغيير اسم الرابط من إعدادات التطبيق في Streamlit Cloud.
