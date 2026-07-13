@@ -1,70 +1,52 @@
-# AI Project Advisor
+# Research Crew
 
-A JSON-first CrewAI project with a Streamlit interface for turning a project
-idea into a researched architecture and implementation plan.
+واجهة Streamlit بسيطة لتشغيل مشروع CrewAI الحالي: تكتب فكرة أو نص البحث، تضغط زر البدء، ثم تظهر النتيجة في نفس الصفحة.
 
-The app reuses `crew.jsonc`, `agents/*.jsonc`, the existing task chain,
-OpenRouter, and Serper. It creates a fresh crew for every submitted topic and
-does not duplicate agent or task definitions in Python.
-
-## Local Setup
+## التشغيل المحلي
 
 ```bash
 uv sync
 uv run streamlit run app.py
 ```
 
-Open the local URL printed by Streamlit, enter a project idea, and submit the
-form. Each run uses OpenRouter and Serper quota.
-
-## Environment Variables
-
-Create a local `.env` file with:
+بعد التشغيل افتح الرابط المحلي الذي يظهر في الطرفية، غالبًا:
 
 ```text
-MODEL="openrouter/openrouter/free"
-OPENROUTER_API_KEY="your-openrouter-key"
-SERPER_API_KEY="your-serper-key"
-APP_PASSWORD="optional-local-password"
+http://localhost:8501
 ```
 
-`APP_PASSWORD` is optional. When it is configured, the app asks for it before
-showing the main interface. Do not commit real secrets.
+## متغيرات التشغيل
 
-## Streamlit Community Cloud
+محليًا، ضع المفاتيح في ملف `.env`:
 
-Deploy from <https://share.streamlit.io>:
+```text
+OPENROUTER_API_KEY="your-openrouter-key"
+SERPER_API_KEY="your-serper-key"
+APP_PASSWORD="optional-password"
+```
 
-1. Select the GitHub repository:
-   `yazeedbesher12/Multi-Agent-CrewAi`.
-2. Use the current branch: `master`.
-3. Set the app entrypoint to `app.py`.
-4. Set Python to `3.13`.
-5. In Advanced settings, add top-level secrets:
+على Streamlit Community Cloud، أضف نفس القيم من صفحة Secrets. لا ترفع المفاتيح الحقيقية إلى GitHub.
+
+## النشر على Streamlit
+
+1. ادخل إلى Streamlit Community Cloud: <https://share.streamlit.io>
+2. اختر المستودع: `yazeedbesher12/Multi-Agent-CrewAi`
+3. اختر الفرع: `master`
+4. اجعل ملف التطبيق: `app.py`
+5. أضف Secrets:
 
 ```toml
-MODEL = "openrouter/openrouter/free"
 OPENROUTER_API_KEY = "replace-with-real-value"
 SERPER_API_KEY = "replace-with-real-value"
 APP_PASSWORD = "optional-password"
 ```
 
-6. Choose public or private sharing based on who should access the app.
-7. Deploy and inspect the build logs if the first build fails.
+6. اضغط Deploy.
 
-Every public use can consume OpenRouter and Serper quota. Configure
-`APP_PASSWORD` if the app should not be open to anyone with the URL.
+بعد النشر سيظهر رابط بالشكل:
 
-## Project Structure
+```text
+https://your-app-name.streamlit.app
+```
 
-- `app.py` - Streamlit UI for the CrewAI workflow
-- `agents/` - Agent definitions (JSONC)
-- `crew.jsonc` - Crew definition with tasks and configuration
-- `tools/` - Custom tools (Python)
-- `knowledge/` - Knowledge files for agents
-- `.streamlit/config.toml` - Streamlit theme
-- `.streamlit/secrets.toml.example` - Placeholder-only secrets template
-
-> **Note:** `custom:<name>` tool references execute `tools/<name>.py` as local
-> Python code when the crew loads. Only run crew projects from sources you
-> trust.
+يمكن تغيير اسم الرابط من إعدادات التطبيق في Streamlit Cloud.
